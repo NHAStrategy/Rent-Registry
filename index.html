@@ -4091,6 +4091,14 @@ function pickCity(code) {
   applyTierToReview();
 
   renderSteps();
+
+  // Auto-advance to the next step after a brief pause. The pause gives
+  // the user a beat to see their selection get the "selected" style
+  // before the pane transitions. Only advance if we're still on the
+  // picker step (guards against Back → re-pick sequences).
+  setTimeout(() => {
+    if (state.step === 0) nextStep();
+  }, 400);
 }
 
 // Read the selected city's tier and hide review sections + rewire the
